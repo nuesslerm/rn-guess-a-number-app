@@ -5,7 +5,7 @@ import {
   Text,
   View,
   TouchableWithoutFeedback,
-  Keyboard,
+  Keyboard, // Keyboard-API for interacting with the phone's keyboard
 } from 'react-native';
 import Card from '../components/Card';
 import Input from '../components/Input';
@@ -13,39 +13,18 @@ import Colors from '../constants/colors';
 
 const StartGameScreen: FC = () => {
   const [enteredValue, setEnteredValue] = useState('');
-  const [confirmed, setIsConfirmed] = useState(false);
-  const [selectedNumber, setSelectedNumber] = useState<number>();
 
   const handleOnChangeText = (text: string) => {
     const validatedText = text.replace(/[^0-9]/g, '');
     setEnteredValue(validatedText);
   };
 
-  const handleOnPressReset = () => {
-    setEnteredValue('');
-    setIsConfirmed(false);
-  };
-
-  const handleOnPressConfirm = () => {
-    const parsedNum = parseInt(enteredValue);
-    /* Note:
-     * NaN is the only JavaScript value that is treated as unequal to itself,
-     * so you can always test if a value is NaN by checking it for equality to itself.
-     * or simply use function isNaN()
-     */
-    if (isNaN(parsedNum) || parsedNum <= 0 || parsedNum >= 99) return;
-
-    setEnteredValue('');
-    setIsConfirmed(true);
-    setSelectedNumber(parsedNum);
-  };
-
-  let confirmedOutput: React.ReactNode; // is a JSX component
-
-  if (confirmed) {
-    confirmedOutput = <Text>Chosen Number: {selectedNumber}</Text>;
-  }
-
+  // <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+  // <TouchableWithoutFeedback
+  //   onPress={() => {
+  //     Keyboard.dismiss();
+  //   }}
+  // >
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.screen}>
@@ -66,20 +45,19 @@ const StartGameScreen: FC = () => {
             <View style={styles.button}>
               <Button
                 title={'Reset'}
-                onPress={handleOnPressReset}
+                onPress={() => {}}
                 color={Colors.secondary}
               />
             </View>
             <View style={styles.button}>
               <Button
                 title={'Confirm'}
-                onPress={handleOnPressConfirm}
+                onPress={() => {}}
                 color={Colors.primary}
               />
             </View>
           </View>
         </Card>
-        {confirmedOutput}
       </View>
     </TouchableWithoutFeedback>
   );
