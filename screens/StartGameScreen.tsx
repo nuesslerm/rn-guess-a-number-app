@@ -6,9 +6,11 @@ import {
   View,
   TouchableWithoutFeedback,
   Keyboard,
+  Alert,
 } from 'react-native';
 import Card from '../components/Card';
 import Input from '../components/Input';
+import NumberContainer from '../components/NumberContainer';
 import Colors from '../constants/colors';
 
 const StartGameScreen: FC = () => {
@@ -33,17 +35,31 @@ const StartGameScreen: FC = () => {
      * so you can always test if a value is NaN by checking it for equality to itself.
      * or simply use function isNaN()
      */
-    if (isNaN(parsedNum) || parsedNum <= 0 || parsedNum >= 99) return;
+    if (isNaN(parsedNum) || parsedNum <= 0 || parsedNum >= 99) {
+      Alert.alert(
+        'Invalid number!',
+        'Number has to be a number between 1 and 99',
+        [{ text: 'Okay', style: 'destructive', onPress: handleOnPressReset }]
+      );
+      return;
+    }
 
     setEnteredValue('');
     setIsConfirmed(true);
     setSelectedNumber(parsedNum);
+    Keyboard.dismiss();
   };
 
   let confirmedOutput: React.ReactNode; // is a JSX component
 
   if (confirmed) {
-    confirmedOutput = <Text>Chosen Number: {selectedNumber}</Text>;
+    confirmedOutput = (
+      <Card style={styles.summaryContainer}>
+        <Text>You selected</Text>
+        <NumberContainer>{selectedNumber}</NumberContainer>
+        <Button title="START GAME" onPress={() => {}} />
+      </Card>
+    );
   }
 
   return (
@@ -100,6 +116,10 @@ const styles = StyleSheet.create({
   textInput: {
     width: 50,
     textAlign: 'center',
+  },
+  summaryContainer: {
+    marginTop: 20,
+    alignItems: 'center',
   },
   buttonsContainer: {
     flexDirection: 'row',
