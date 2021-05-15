@@ -2,18 +2,6 @@ import React, { FC } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Colors from '../constants/colors';
 
-interface HeaderProps {
-  title: string;
-}
-
-const Header: FC<HeaderProps> = ({ title }) => {
-  return (
-    <View style={styles.headerContainer}>
-      <Text style={styles.headerTitle}>{title}</Text>
-    </View>
-  );
-};
-
 const styles = StyleSheet.create({
   headerContainer: {
     width: '100%',
@@ -28,5 +16,17 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
 });
+
+type HeaderProps = {
+  title: string;
+};
+
+const Header: FC<HeaderProps> = ({ title }) => {
+  return (
+    <View style={styles.headerContainer}>
+      <Text style={styles.headerTitle}>{title}</Text>
+    </View>
+  );
+};
 
 export default Header;

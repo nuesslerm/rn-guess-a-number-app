@@ -1,15 +1,5 @@
 import React, { FC } from 'react';
-import { TextInput, StyleSheet, TextInputProps } from 'react-native';
-
-type InputProps = {
-  [key in keyof TextInputProps]?: any;
-};
-
-const Input: FC<InputProps> = (props) => {
-  const { style, ...otherProps } = props;
-
-  return <TextInput {...otherProps} style={{ ...styles.input, ...style }} />;
-};
+import { TextInput, StyleSheet, TextInputProps, TextStyle } from 'react-native';
 
 const styles = StyleSheet.create({
   input: {
@@ -19,5 +9,15 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
 });
+
+type InputProps = Omit<TextInputProps, 'style'> & {
+  style: TextStyle;
+};
+
+const Input: FC<InputProps> = (props) => {
+  const { style, ...otherProps } = props;
+
+  return <TextInput {...otherProps} style={{ ...styles.input, ...style }} />;
+};
 
 export default Input;

@@ -3,18 +3,6 @@ import { View, Text, StyleSheet } from 'react-native';
 
 import Colors from '../constants/colors';
 
-interface NumberContainerProps {
-  children: React.ReactNode;
-}
-
-const NumberContainer: FC<NumberContainerProps> = ({ children }) => {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.number}>{children}</Text>
-    </View>
-  );
-};
-
 const styles = StyleSheet.create({
   container: {
     borderWidth: 2,
@@ -30,5 +18,17 @@ const styles = StyleSheet.create({
     fontSize: 22,
   },
 });
+
+interface NumberContainerProps {
+  children: React.ReactNode;
+}
+
+const NumberContainer: FC<NumberContainerProps> = ({ children }) => {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.number}>{children}</Text>
+    </View>
+  );
+};
 
 export default NumberContainer;
