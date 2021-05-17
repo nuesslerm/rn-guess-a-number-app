@@ -2,7 +2,6 @@ import React, { FC, useState } from 'react';
 import {
   Button,
   StyleSheet,
-  Text,
   View,
   TouchableWithoutFeedback,
   Keyboard,
@@ -12,6 +11,8 @@ import {
 import Card from '../components/Card';
 import ConfirmedOutput from '../components/ConfirmedOutput';
 import Input from '../components/Input';
+import BodyText from '../components/BodyText';
+import TitleText from '../components/TitleText';
 import Colors from '../constants/colors';
 
 const styles = StyleSheet.create({
@@ -25,7 +26,11 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginVertical: 10,
   },
-  inputContainer: { width: 300, maxWidth: '80%', alignItems: 'center' },
+  inputContainer: {
+    width: 300,
+    maxWidth: '80%',
+    alignItems: 'center',
+  },
   textInput: {
     width: 50,
     textAlign: 'center',
@@ -84,9 +89,9 @@ const StartGameScreen: FC<StartGameScreenProps> = ({ onStartGame }) => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.screen}>
-        <Text style={styles.title}>Start a New Game!</Text>
+        <TitleText style={styles.title}>Start a New Game!</TitleText>
         <Card style={styles.inputContainer}>
-          <Text>Select a Number</Text>
+          <BodyText>Select a Number</BodyText>
           <Input
             style={styles.textInput}
             blurOnSubmit

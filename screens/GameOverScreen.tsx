@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet, Button } from 'react-native';
+import BodyText from '../components/BodyText';
 
 const styles = StyleSheet.create({
   screen: {
@@ -9,10 +10,23 @@ const styles = StyleSheet.create({
   },
 });
 
-const GameOverScreen: FC = () => {
+type GameOverScreenProps = {
+  numberOfRounds: number;
+  userNumber: number;
+  onRestart: () => void;
+};
+
+const GameOverScreen: FC<GameOverScreenProps> = ({
+  numberOfRounds,
+  userNumber,
+  onRestart,
+}) => {
   return (
     <View style={styles.screen}>
-      <Text>The Game is Over!</Text>
+      <BodyText>The Game is Over!</BodyText>
+      <BodyText>Number of rounds: {numberOfRounds}</BodyText>
+      <BodyText>Number was: {userNumber}</BodyText>
+      <Button title="NEW GAME" onPress={onRestart} />
     </View>
   );
 };

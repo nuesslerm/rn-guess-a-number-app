@@ -1,5 +1,8 @@
+/* eslint-disable global-require */
 import React, { FC, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
+import * as Font from 'expo-font';
+import AppLoading from 'expo-app-loading';
 
 import Header from './components/Header';
 import GameOverScreen from './screens/GameOverScreen';
@@ -12,17 +15,39 @@ const styles = StyleSheet.create({
   },
 });
 
+const fetchFonts = () => {
+  return Font.loadAsync({
+    'open-sans': require('./assets/fonts/OpenSans-Regular.ttf'),
+    'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf'),
+  });
+};
+
 const App: FC = () => {
   const [userNumber, setUserNumber] = useState<number>();
   const [guessRounds, setGuessRounds] = useState<number>(0);
+  const [dataLoaded, setDataLoaded] = useState(false);
+
+  if (!dataLoaded) {
+    return (
+      <AppLoading
+        startAsync={fetchFonts}
+        onFinish={setDataLoaded.bind(null, true)}
+        onError={(err: Error) => console.error(err.message)}
+      />
+    );
+  }
+
+  const handleResetGame = () => {
+    setGuessRounds(0);
+    setUserNumber(undefined);
+  };
 
   const handleStartGame = (selectedNumber?: number) => {
     setUserNumber(selectedNumber);
-    setGuessRounds(0);
   };
 
   const handleGameOver = (numberOfRounds: number) => {
-    setUserNumber(numberOfRounds);
+    setGuessRounds(numberOfRounds);
   };
 
   let content = <StartGameScreen onStartGame={handleStartGame} />;
@@ -32,7 +57,13 @@ const App: FC = () => {
       <GameScreen userChoice={userNumber} onGameOver={handleGameOver} />
     );
   } else if (userNumber && guessRounds) {
-    content = <GameOverScreen />;
+    content = (
+      <GameOverScreen
+        numberOfRounds={guessRounds}
+        userNumber={userNumber}
+        onRestart={handleResetGame}
+      />
+    );
   }
 
   return (

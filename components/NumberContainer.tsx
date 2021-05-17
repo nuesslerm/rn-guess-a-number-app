@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 
 import Colors from '../constants/colors';
+import BodyText from './BodyText';
 
 const styles = StyleSheet.create({
   container: {
@@ -26,7 +27,7 @@ interface NumberContainerProps {
 const NumberContainer: FC<NumberContainerProps> = ({ children }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.number}>{children}</Text>
+      <BodyText style={styles.number}>{children}</BodyText>
     </View>
   );
 };
