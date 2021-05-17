@@ -26,6 +26,7 @@
     "@typescript-eslint/no-use-before-define": ["error"],
     "import/extensions": "off",
     "import/no-unresolved": "off",
+    "no-console": ["warn", { "allow": ["warn", "error"] }],
     "react/jsx-props-no-spreading": "off",
     "react/prop-types": 0,
     "react/no-unescaped-entities": 0

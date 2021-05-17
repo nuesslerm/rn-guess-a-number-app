@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
-import { Button, Text, StyleSheet } from 'react-native';
+import { Button, StyleSheet } from 'react-native';
 
+import BodyText from './BodyText';
 import Card from './Card';
 import NumberContainer from './NumberContainer';
 
@@ -22,7 +23,7 @@ const ConfirmedOutput: FC<ConfirmedOutputProps> = ({
 }) => {
   return (
     <Card style={styles.summaryContainer}>
-      <Text>You selected</Text>
+      <BodyText>You selected</BodyText>
       <NumberContainer>{selectedNumber}</NumberContainer>
       <Button
         title="START GAME"

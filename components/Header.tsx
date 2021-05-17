@@ -1,6 +1,8 @@
 import React, { FC } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+
 import Colors from '../constants/colors';
+import TitleText from './TitleText';
 
 const styles = StyleSheet.create({
   headerContainer: {
@@ -13,7 +15,6 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     color: 'black',
-    fontSize: 18,
   },
 });
 
@@ -24,7 +25,7 @@ type HeaderProps = {
 const Header: FC<HeaderProps> = ({ title }) => {
   return (
     <View style={styles.headerContainer}>
-      <Text style={styles.headerTitle}>{title}</Text>
+      <TitleText style={styles.headerTitle}>{title}</TitleText>
     </View>
   );
 };
